@@ -1,0 +1,19 @@
+<nav class="nav pages-subnavi">
+ <div class="container mt-container">
+     <div class="subnavi-depth__wrap">
+		<ul class="subnavi-depth">
+        <mt:TopLevelFolder>
+        	<mt:If tag="CategoryCount">
+        <li><a href="<$mt:BlogURL$><$mt:FolderBasename$>/"><$mt:FolderLabel$></a></li>
+        	</mt:If>
+        <mt:SetVarBlock name="topfolder"><$mt:FolderBasename$></mt:SetVarBlock>
+        <mt:SubFolders>
+        	<mt:If tag="CategoryCount">
+        <li><a href="<$mt:BlogURL$><$mt:Var name="topfolder"$>/<$mt:FolderBasename$>/"><$mt:FolderLabel$></a></li>
+        	</mt:If>
+      </mt:SubFolders>
+      </mt:TopLevelFolder>
+      </ul>
+   </div>
+   </div>
+</nav>

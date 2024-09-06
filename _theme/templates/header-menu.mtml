@@ -1,0 +1,30 @@
+<mt:SetVarBlock name="blog_name"><$mt:BlogName encode_html="1"$></mt:SetVarBlock>
+<header>
+  <div class="navbar mt-navbar navbar-default mt-navbar-default navbar-fixed-top" role="navigation">
+    <div class="container mt-container">
+      <div class="navbar-header mt-navbar-header">
+        <button type="button" class="navbar-toggle mt-navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" accesskey="0" TABINDEX="navi">
+          <span class="sr-only">ナビゲーションの切替</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand mt-navbar-brand" href="<$mt:BlogRelativeURL$>"><h1 class="mt-h1"><!-- mt-site-editor-logo --><mt:If name="logo"><img src="<mt:Asset id="$logo"><$mt:AssetURL$></mt:Asset>" alt="<$mt:BlogName encode_html="1"$>"><mt:Else><!-- mt-site-editor-logo-if-empty --><$mt:BlogName encode_html="1"$><!-- /mt-site-editor-logo-if-empty --></mt:If><!-- /mt-site-editor-logo --></h1></a>
+      </div>
+      <div class="navbar-collapse mt-collapse collapse">
+        <nav>
+          <ul class="nav navbar-nav mt-navbar-nav">
+            <li><a href="<$mt:BlogURL$>">トップ</a></li>
+            <li><a href="<$mt:BlogURL$>news.html">ニュース</a></li>
+          <$mt:Var name="page_ids" editor:type="list" editor:mode="editor" editor:label="グローバルナビゲーション" editor:description="ナビゲーションに表示したいウェブページを指定します。" editor:update:selector=".page_item" editor:button:position="13,0" editor:update:parent:selector=".mt-navbar-nav" editor:update:html="$page_item_html"$>
+          <mt:If name="page_ids">
+            <mt:Pages ids="$page_ids">
+  <li class="page_item"><a href="<$mt:PagePermalink$>" class="page_item__url page_item__title"><$mt:PageTitle encode_html=“1”$></a></li>
+            </mt:Pages>
+           </mt:If>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

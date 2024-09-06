@@ -1,71 +1,280 @@
-id: simplecorporate
+id: "sc"
+label: "sc"
+version: "2.0.4"
+author_link: "https://kanse-net.movabletype.io/"
+author_name: "開発 - カンセ"
+description: "sc"
+class: "blog"
 elements:
   blog_static_files:
     component: ~
     data:
+      - css
       - images
       - js
     importer: blog_static_files
-  template_set:
+  custom_fields:
+    component: commercial
+    data:
+      footernavi_on:
+        default: ''
+        description: "フッターメニューに表示する場合にチェックを入れます。"
+        name: "フッターメニューに表示"
+        obj_type: page
+        options: ''
+        required: 0
+        type: checkbox
+      logo_images:
+        default: ''
+        description: "ヘッダーに表示されるタイトルロゴの画像をアップロードします。"
+        name: "ヘッダーロゴ画像"
+        obj_type: blog
+        options: ''
+        required: 0
+        type: asset_image
+      main_image_page:
+        default: ''
+        description: "ヘッダー、ページ一覧のサムネイル、メインページ内リンクボックスに使われるイメージを設定します。\r\n（1280px×360px以上推奨）"
+        name: "ページ内イメージ"
+        obj_type: page
+        options: ''
+        required: 0
+        type: asset_image
+      main_images:
+        default: ''
+        description: "サイトのメインイメージをアップロードします。"
+        name: "メインイメージ"
+        obj_type: blog
+        options: ''
+        required: 0
+        type: asset_image
+      mvlogo_images:
+        default: ''
+        description: "メインビジュアルに乗せるタイトルロゴの画像をアップロードします"
+        name: "メインビジュアルロゴ画像"
+        obj_type: blog
+        options: ''
+        required: 0
+        type: asset_image
+      navi_on:
+        default: 1
+        description: "グローバルナビに表示する場合にチェックを入れます。"
+        name: "グローバルナビに表示"
+        obj_type: page
+        options: ''
+        required: 0
+        type: checkbox
+      pagetype:
+        default: "個別ページ"
+        description: "個別ページ：単体のページのデザインです。（デフォルト）\r\nページ一覧：同じフォルダのページを一覧で表示するデザインです。１つのフォルダにつき、１つまで設定できます。"
+        name: "ページのレイアウト"
+        obj_type: page
+        options: "個別ページ,ページ一覧"
+        required: 1
+        type: radio
+      top_webpages:
+        default: 0
+        description: "メインページに表示させる場合にチェックを入れます。フォルダに入っているウェブページはフォルダ毎に並びます。"
+        name: "メインページに表示"
+        obj_type: page
+        options: ''
+        required: 0
+        type: checkbox
+      webpage_maintext:
+        default: ''
+        description: "かんたんデザイン編集機能を使って、メインページ内にウェブページへのリンクボックスを表示できます。\r\nここでは、リンクボックス内に表示するウェブページの説明文を追加します。\r\n説明文の入力がない場合は「概要（記事の要約）」を表示、概要も空の場合は「本文」を表示します。"
+        name: "【かんたんデザイン編集】メインページ掲載用　ウェブページ説明文"
+        obj_type: page
+        options: block_editor
+        required: 0
+        type: textarea
+    importer: custom_fields
+  entry_format_prefs:
     component: ~
     data:
+      page:
+        convert_breaks: use_previous
+        text_filters:
+          - 0
+          - __default__
+          - markdown
+          - richtext
+          - block_editor
+      post:
+        convert_breaks: use_previous
+        text_filters:
+          - 0
+          - __default__
+          - markdown
+          - richtext
+          - block_editor
+    importer: entry_format_prefs
+  field_display_options:
+    component: ~
+    data:
+      page:
+        excerpt:
+          display: default
+          order: 4
+        field.main_image_page:
+          display: default
+          order: 2
+        field.pagetype:
+          display: default
+          order: 1
+        field.webpage_maintext:
+          display: default
+          order: 3
+        keywords:
+          display: default
+          order: 5
+        text:
+          display: default
+          order: 0
+      post:
+        excerpt:
+          area: main
+          display: default
+          order: 1
+        keywords:
+          area: main
+          display: default
+          order: 2
+        text:
+          area: main
+          display: default
+          order: 0
+    importer: field_display_options
+  template_set:
+    component: core
+    data:
       base_path: templates
-      label: 'exported_template set'
       templates:
         archive:
           category_entry_listing:
-            label: カテゴリ別記事リスト
+            filename: category_entry_listing.mtml
+            label: "カテゴリ別ニュース記事リスト"
             mappings:
               category:
                 archive_type: Category
+                file_template: "%-c/%i"
+                preferred: 1
           yearly_entry_listing:
-            label: 年別ブログ記事リスト
+            filename: yearly_entry_listing.mtml
+            label: "年別ニュース記事リスト"
             mappings:
               yearly:
                 archive_type: Yearly
+                file_template: "%y/%i"
+                preferred: 1
+                start_month: 1
         index:
           feed_recent:
-            label: 最新記事のフィード
+            filename: atom.xml.mtml
+            label: "最新記事のフィード"
             outfile: atom.xml
             rebuild_me: 1
-          index_page:
-            label: インデックスページ
+          main_index:
+            filename: index.html.mtml
+            label: "メインページ"
             outfile: index.html
             rebuild_me: 1
-          main_index:
-            label: 'ニュース TOP'
+            settings: index_settings.mtml
+          news:
+            filename: news.html.mtml
+            label: "ニュース"
             outfile: news.html
             rebuild_me: 1
+          search:
+            filename: search.html.mtml
+            label: "検索結果"
+            outfile: search.html
+            rebuild_me: 1
           styles:
-            label: スタイルシート
+            filename: styles.css.mtml
+            label: "スタイルシート"
             outfile: styles.css
             rebuild_me: 1
         individual:
           entry:
-            label: 記事
+            filename: entry.mtml
+            label: "記事"
             mappings:
               individual:
                 archive_type: Individual
+                file_template: "%y/%m/%-f"
+                preferred: 1
         module:
-          header:
-            label: header
-          blog-sidemenu:
-            label: blog-sidemenu
-          entry-list:
-            label: entry-list
+          breadcrumbs:
+            filename: breadcrumbs.mtml
+            label: "パンくずリスト"
           config:
-            label: config
-          common_stylesheet:
-            label: common_stylesheet
-          common_head_js:
-            label: common_head_js
-          common_bottom_js:
-            label: common_bottom_js
+            filename: config.mtml
+            label: "全般設定"
+            settings: config_settings.mtml
+          entry-list:
+            filename: entry-list.mtml
+            label: "ニュース記事一覧"
+            settings: entry-list_settings.mtml
+          folder_pages:
+            filename: folder_pages.mtml
+            label: "ウェブページ一覧"
           footer:
-            label: footer
+            filename: footer.mtml
+            label: "フッター"
+            settings: footer_settings.mtml
+          footer-script:
+            filename: footer-script.mtml
+            label: "フッター内script"
+          go-to-top:
+            filename: go-to-top.mtml
+            label: "ページ上部に戻るボタン"
+          header-menu:
+            filename: header-menu.mtml
+            label: "ヘッダーメニュー"
+            settings: header-menu_settings.mtml
+          header-script:
+            filename: header-script.mtml
+            label: "ヘッダー内script"
+          news-header:
+            filename: news-header.mtml
+            label: "ニュースヘッダー"
+            settings: news-header_settings.mtml
+          news-sidebar:
+            filename: news-sidebar.mtml
+            label: "ニュースサイドバー"
+          pages-folder-subnavi:
+            filename: pages-folder-subnavi.mtml
+            label: "ウェブページ一覧ナビ"
+          social_button:
+            filename: social_button.mtml
+            label: "ソーシャルシェアボタン"
+            settings: social_button_settings.mtml
+          top_pages:
+            filename: top_pages.mtml
+            label: "メインページ内リンクボックス"
+            settings: top_pages_settings.mtml
         page:
-          page:
-            label: ウェブページ
+          webpage:
+            filename: webpage.mtml
+            label: "ウェブページ"
             mappings:
               page:
                 archive_type: Page
+                file_template: "%-c/%-f"
+                preferred: 1
+            settings: webpage_settings.mtml
+        system:
+          404_error:
+            filename: 404_error.mtml
+            label: "404 エラー"
+          editor_css:
+            filename: editor_css.mtml
+            label: "エディタCSS"
+    importer: template_set
+  thumbnail_image:
+    component: ~
+    data:
+      show_thumbnail_editor: 1
+    importer: thumbnail_image
+

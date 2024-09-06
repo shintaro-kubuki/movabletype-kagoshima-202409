@@ -1,0 +1,26 @@
+<$mt:Var name="webpage_ids" editor:type="list" editor:mode="editor" editor:label="ウェブページ表示" editor:description="トップページに表示したいウェブページを指定します。" editor:update:selector=".pagemenu__bgwrap" editor:update:parent:selector=".pagemenu > .row" editor:update:fetch="1"$>
+<section class="pagemenu">
+<div class="row mt-row">
+<mt:If name="webpage_ids">
+	<mt:Pages ids="$webpage_ids">
+    <div class="col-sm-12 mt-col-sm-12 pagemenu__bgwrap"<mt:If name="pagemenu__bgwrap"> data-mt-site-editor-pagemenu__bgwrap="1"</mt:If><mt:If tag="CustomFieldValue" identifier="main_image_page"> style="background-image: url(<mt:CustomFieldAsset identifier="main_image_page"><$mt:AssetThumbnailURL width="800"$></mt:CustomFieldAsset>)</mt:If>">
+      <article class="pagemenu__textwrap">
+        <h3 class="pagemenu__bgwrap__title pagemenu__title"><$mt:PageTitle encode_html="1"$></h3>
+        <div class="pagemenu__bgwrap__excerpt pagemenu__text wysiwyg" data-mh="my-group">
+			<mt:If tag="CustomFieldValue" identifier="webpage_maintext">
+        <$mt:CustomFieldValue identifier="webpage_maintext"$>
+        <mt:ElseIf tag="PageExcerpt">
+        <$mt:PageExcerpt$>
+        <mt:Else>
+        <$mt:PageBody convert_breaks=" 1" words="800"$>
+        </mt:If>
+      </div>
+        <p class="pagemenu__button">
+          <a href="<$mt:PagePermalink$>" class="btn btn-primary mt-btn-primary mt-btn-lg">詳しく見る</a>
+        </p>
+      </article>
+    </div>
+	</mt:Pages>
+</mt:If>
+</div>
+</section>

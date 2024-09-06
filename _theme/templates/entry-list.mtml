@@ -1,18 +1,28 @@
-        <mt:Entries>
-          <article class="entry clearfix">
-            <mt:EntryAssets type="image" sort_order="ascend" limit="1">
-            <figure><img src="<$mt:AssetThumbnailURL width="240"$>"></figure>
-            </mt:EntryAssets>
-            <div class="entry-meta">
-              <time datetime="<$mt:EntryDate format="%Y-%m-%d"$>"><span class="year"><$mt:EntryDate format="%Y"$>年</span><span class="monthday"><$mt:EntryDate format="%b月%e日"$></span></time>
-              <mt:EntryCategories type="primary"><a href="<$mt:CategoryArchiveLink$>" class="category"><$mt:CategoryLabel$></a></mt:EntryCategories>
-            </div>
-            <h1 class="entrytitle"><a href="<$mt:EntryPermalink$>"><$mt:EntryTitle$></a></h1>
-            <div class="entry-excerpt">
-              <$mt:EntryExcerpt$>
-            </div>
-            <div class="pagemore">
-              <a href="<$mt:EntryPermalink$>" class="btn btn-primary">この記事の詳細を見る</a>
-            </div>
-          </article><!-- /.entry -->
-        </mt:Entries>
+<mt:SetVarBlock name="paginate_value"><mt:If name="paginate"><$mt:GetVar name="paginate"$><mt:Else>3</mt:If></mt:SetVarBlock>
+<ul>
+<mt:Entries paginate_by="$paginate_value">
+	<li>
+	<article class="newslist__item">
+  <a href="<$mt:EntryPermalink$>">
+    <div class="newsdata__wrap">
+      <p class="date"><$mt:EntryDate format="%Y.%m.%d"$></p>
+    <mt:If tag="CategoryLabel"><p class="genre"><mt:EntryCategories type="primary"><$mt:CategoryLabel encode_html="1"$></mt:EntryCategories></p></mt:If>
+    </div>
+    <dl class="newstext__wrap">
+      <dt><h4 class="newstext__title"><$mt:EntryTitle encode_html="1"$></h4></dt>
+    </dl>
+  </a>
+	</article>
+</li>
+<mt:EntriesFooter>
+</ul>
+<div class="newslistbutton-wrap">
+<mt:PaginationHasPrevious>
+<a class="btn btn-primary mt-btn-primary mt-btn-lg newslist__prevbutton" href="<$mt:PaginationPreviousURL$>">前の<$mt:GetVar name="paginate"$>件</a>
+</mt:PaginationHasPrevious>
+<mt:PaginationHasNext>
+<a class="btn btn-primary mt-btn-primary mt-btn-lg newslist__nextbutton" href="<$mt:PaginationNextURL$>">次の<$mt:GetVar name="paginate"$>件</a>
+</mt:PaginationHasNext>
+</div>
+</mt:EntriesFooter>
+</mt:Entries>

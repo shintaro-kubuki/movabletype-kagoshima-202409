@@ -1,0 +1,28 @@
+<div class="pageslist">
+<mt:SetVarBlock name="page_folder"><mt:PageFolder><$mt:FolderLabel encode_html="1"$></mt:PageFolder></mt:SetVarBlock>
+<$mt:PageID setvar="id"$>
+<mt:IfFolder>
+ <mt:Pages sort_order="ascend" folder="$page_folder" field:pagetype="個別ページ">  
+ <article class="pagesColumnWrap <mt:If tag="CustomFieldValue" identifier="main_image_page">yesimg<mt:Else>noimg</mt:If>" id="<$MTPageBasename$>"> 
+   <div class="container-fluid mt-container-fluid">     
+     <div class="row mt-row">
+       <div class="<mt:If tag="CustomFieldValue" identifier="main_image_page">col-sm-6  mt-col-sm-6 pages__item<mt:Else>col-sm-12</mt:If>">
+         <h3 class="pagesitem__subtitle"><$mt:PageTitle encode_html="1"$></h3>
+         <p class="pagesitem__text" data-mh="group01">
+           <$mt:PageExcerpt words="200"$>
+         </p>
+         <p class="pages__button">
+           <a class="btn btn-primary mt-btn-primary mt-btn-lg" href="<$mt:PagePermalink$>">詳しく見る</a>
+         </p>  
+       </div>
+       <mt:If tag="CustomFieldValue" identifier="main_image_page">
+       <div class="col-sm-6 mt-col-sm-6 itemimages__wrap">
+         <img src="<mt:CustomFieldAsset identifier="main_image_page"><$mt:AssetThumbnailURL width="640"$></mt:CustomFieldAsset>" alt="" class="itemimages__images"/>
+       </div>
+       </mt:If>
+     </div>
+   </div>
+ </article>
+ </mt:Pages>
+</mt:IfFolder>
+</div>

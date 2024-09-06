@@ -1,0 +1,139 @@
+<$mt:Include module="config" strip_linefeeds="1"$>
+
+/* bootstrap */
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* theme style */
+
+.entry, .page {
+	font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+	color: <$mt:GetVar name="main_text_color"$>;
+}
+
+.entry a, .page a {
+	color: <$mt:GetVar name="main_color"$>;
+	text-decoration: underline;
+}
+
+.entry h1, .page h1 {
+	font-size: 3em;
+  }
+.entry h2, .page h2 {
+	font-size: 2.5em;
+  }
+
+.entry h3, .page h3 {
+	height: 35px;
+	color: <$mt:GetVar name="main_text_color"$>;
+	font-size: 1.75em;
+	margin: 0px 0 21px 0;
+	border-bottom: 1px dotted #bababa;
+	padding-left: 18px;
+	position: relative;
+	margin-bottom: 21px;
+}
+
+.entry h3:before, .page h3:before {
+	content: "";
+	display: block;
+	width: 7px;
+	height: 35px;
+	background-color: <$mt:GetVar name="sub_color"$>;
+	position: absolute;
+	left: 0px;
+}
+
+.entry h4, .page h4 {
+	color: <$mt:GetVar name="sub_color"$>;
+	font-size: 21px;
+	font-weight: bold;
+	text-align: center;
+	margin: 21px 0;
+}
+
+.entry figure, .page figure, 
+.entry img, .page img {
+	margin: 14px 0;
+	max-width: 100%;
+	height: auto;
+}
+
+.entry figure figcaption, .page figure figcaption  {
+	margin-top: -10px;
+}
+
+.entry strong, .page strong {
+	font-weight: bold;
+}
+
+.entry ul, .page ul {
+	margin: 0 0 14px;
+  padding: 0;
+}
+
+.entry ul li, .page ul li {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+	background-image: url("<$mt:BlogURL$>images/icon/listicon.png");
+	background-repeat: no-repeat;
+	background-position: 0px 3px;
+	background-size: 14px;
+	padding-left: 21px;
+}
+
+.entry ol, .page ol {
+	margin: 0 0 14px;
+  padding: 0 0 0 20px;
+}
+
+.entry ol li, .page ol li {
+	list-style-type: decimal;
+}
+
+.entry hr, .page hr {
+	margin: 21px 0;
+	border-top: 1px solid <$mt:GetVar name="middle_color"$>;
+}
+
+.entry blockquote, .page blockquote {
+	width: auto;
+	display: table;
+	border: 2px solid <$mt:GetVar name="middle_color"$>;
+	padding: 7px;
+	margin: 0 0 14px;
+	font-size: 1em;
+}
+
+.entry p, .page p {
+	margin: 0 0 14px;
+}
+
+@media screen and (min-width: 768px) {
+.entry h3, .page h3  {
+	height: 42px;
+	font-size: 2em;
+	margin: 0px 0 2rem 0;
+	margin-bottom: 28px;
+}
+
+.entry h3:before, .page h3:before {
+	width: 10px;
+	height: 42px;
+}
+
+.entry h4, .page h4 {
+	font-size: 2.5em;
+	margin: 21px 0 28px 0;
+}
+}

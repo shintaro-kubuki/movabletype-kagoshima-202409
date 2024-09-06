@@ -1,0 +1,82 @@
+<!DOCTYPE html><$mt:Include module="全般設定" strip_linefeeds="1"$>
+<html lang="<$mt:BlogLanguage$>">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<meta charset="<$mt:PublishCharset$>">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><$mt:BlogName encode_html="1"$></title>
+<link rel="shortcut icon" href="<$mt:BlogURL encode_html="1"$>images/favicon.ico">
+<link rel="start" href="<$mt:BlogURL encode_html="1"$>">
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="<$mt:Link template="feed_recent"$>">
+<$mt:CanonicalLink$>
+<!-- Open Graph Protocol -->
+<meta property="og:locale" content="<$mt:BlogLanguage setvar="blog_lang"$><mt:If name="blog_lang" eq="ja">ja_JP<mt:Else><$mt:Var name="blog_lang"$></mt:If>">
+<meta property="og:title" content="<$mt:BlogName encode_html="1"$>">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<$mt:BlogURL encode_html="1"$>">
+<meta property="og:image" content="<mt:If name="default_ogp_image"><mt:Asset id="$default_ogp_image"><$mt:AssetURL$></mt:Asset><mt:Else><$mt:BlogURL encode_html="1"$>images/ogimage.jpg</mt:If>">
+<meta property="og:description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<meta property="og:site_name" content="<$mt:BlogName encode_html="1"$>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@<$mt:Var name='x-twitterVia'$>">
+<meta name="twitter:title" content="<$mt:BlogName encode_html="1"$>">
+<meta name="twitter:description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<meta name="twitter:image" content="<mt:If name="default_ogp_image"><mt:Asset id="$default_ogp_image"><$mt:AssetURL$></mt:Asset><mt:Else><$mt:BlogURL encode_html="1"$>images/ogimage.jpg</mt:If>">
+<!-- Microdata -->
+<meta itemprop="description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<link itemprop="url" href="<$mt:BlogURL encode_html="1"$>">
+<link itemprop="image" href="<mt:If name="default_ogp_image"><mt:Asset id="$default_ogp_image"><$mt:AssetURL$></mt:Asset><mt:Else><$mt:BlogURL encode_html="1"$>images/ogimage.jpg</mt:If>">
+<$mt:Include module="ヘッダー内script"$>
+</head>
+<body> 
+<$mt:Include module="ヘッダーメニュー"$>
+<div class="jumbotron mt-jumbotron jumbotron__indexImg"<mt:If name="asset_id"> style="background-image:url(<mt:Asset id="$asset_id"><$mt:AssetURL$></mt:Asset>);"<mt:Else><$mt:SetVar name="asset_id" value="1"$></mt:If>>
+<$mt:Var name="asset_id" editor:type="image" editor:mode="editor" editor:update:selector=".jumbotron__indexImg" editor:update:attribute="style:backgroundImage" editor:label="メイン画像" editor:button:position="-270,5"$>
+<div class="container mt-container">
+      <hgroup class="mainlead__block" <mt:If name="mainlead__block">data-mt-site-editor-mainlead__block="1"</mt:If>>
+        <div class="mainlead__title">
+        <$mt:Var name="mainlead__title" default="<p>Stylish Corporateは<br>企業サイトです</p>" editor:type="contenteditable" editor:label="メインキャッチコピー" editor:mode="text" editor:button:position="-15, -20" editor:editor="richtext" editor:button:mode="before" editor:update:required="1"$></div>
+      <div class="mainlead__caption"><$mt:Var name="header__description" default="<p>企業をイメージしたサイトです。レスポンシブ対応済み。<br>従来のカラムの形式になっていないデザインがお好みの方向け。</p>" editor:type="contenteditable" editor:label="キャッチコピー概要" editor:mode="text" editor:button:position="-15, -20" editor:editor="richtext" editor:button:mode="before" editor:update:required="1"$>
+        </div>
+      </hgroup>
+  </div>
+</div>
+<$mt:Include module="メインページ内リンクボックス"$>
+<section class="newsarea">
+  <div class="container-fluid mt-container-fluid">        
+      <h3 class="newsarea__title">最新情報</h3>
+    <div class="newsarea__entry">
+      <ul>
+        <mt:Entries limit="3">
+        <li>
+            <a href="<$mt:EntryPermalink$>">
+            <article class="newsentry__item">
+              <div class="newsdata__wrap">
+                <p class="newsentry__date">
+                  <time datetime="<$mt:EntryDate format="%Y.%m.%d"$>"><$mt:EntryDate format="%Y.%m.%d"$></time>
+                </p>
+                <div class="newsentry__genreWrap">
+                <mt:If tag="CategoryLabel"><p class="newsentry__genre"><mt:EntryCategories type="primary"><$mt:CategoryLabel encode_html="1"$></mt:EntryCategories></p></mt:If>
+                </div>
+                </div>
+                <div class="newsentry__text">
+                  <p class="newsentry__title"><$mt:EntryTitle encode_html="1"$></p>
+              </div>
+            </article>
+            </a>
+        </li>
+        </mt:Entries>
+      </ul>
+      <div class="newsentry__button">
+        <a href="<$mt:BlogRelativeURL$>news.html" class="btn btn-primary mt-btn-primary mt-btn-lg">一覧を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+<$mt:Include module="ページ上部に戻るボタン"$>
+<$mt:Include module="フッター"$>
+<$mt:Include module="フッター内script"$>
+</body>
+</html>

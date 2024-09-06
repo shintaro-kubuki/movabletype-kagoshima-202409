@@ -1,0 +1,6 @@
+<mt:SetVarBlock name="page_item_html">
+<li class="page_item"><a class="page_item__url page_item__title"></a></li>
+</mt:SetVarBlock>
+<mt:SetVarBlock name="blog_name"><$mt:BlogName encode_html="1"$></mt:SetVarBlock>
+<$mt:Var name="logo" editor:type="image" editor:mode="editor" editor:update:attribute="src" editor:update:selector=".mt-navbar-brand img, .footerlogo__wrap img" editor:label="ロゴ画像" editor:description="サイト名の代わりにロゴ画像を指定できます。" editor:if:value="<img>" editor:if:empty="$blog_name"$>
+<$mt:Var name="page_ids" editor:type="list" editor:mode="editor" editor:label="グローバルナビゲーション" editor:description="ナビゲーションに表示したいウェブページを指定します。" editor:update:selector=".page_item" editor:register="0" editor:update:parent:selector=".mt-navbar-nav" editor:update:html="$page_item_html"$>

@@ -1,0 +1,69 @@
+<aside class="news-sidemenu">
+  
+  <mt:If tag="PushNotificationEnabled">
+  <a href="javascript:void(0)" class="webpush" onclick="MT.PushNotification.openSubscriptionModal()">
+    <div class="side-webpush"><span class="side-webpush__txt">Webプッシュ通知の購読</span></div>
+  </a>
+  </mt:If>
+  <div class="news-sidemenu__wrap">
+  <mt:ArchiveList archive_type="Individual" lastn="3">
+    <mt:ArchiveListHeader>
+    <h3 class="news-sidemenu__subtitle">最新記事</h3>
+      <ul class="nav side-entry__wrap side-entry__lastlatest">
+    </mt:ArchiveListHeader>
+      <li>
+      <a href="<$mt:ArchiveLink encode_html="1"$>"><date datetime="<$mt:EntryDate format="%Y.%m.%d"$>"><$mt:EntryDate format="%Y.%m.%d"$></date><p><$mt:ArchiveTitle$></p></a>
+      </li>
+    <mt:ArchiveListFooter>
+    </ul>
+    </mt:ArchiveListFooter>
+  </mt:ArchiveList>
+	</div>
+	
+<mt:SetVarBlock name="sidecategory">
+	<mt:ArchiveList archive_type="Category"></mt:ArchiveList>
+</mt:SetVarBlock>
+  <mt:If name="sidecategory">
+  <mt:ArchiveList archive_type="Category">
+    <mt:ArchiveListHeader>
+  <div class="news-sidemenu__wrap">
+    <h3 class="news-sidemenu__subtitle">カテゴリ</h3>
+      <ul class="nav side-entry__wrap category">
+          <mt:TopLevelCategories>
+          <mt:If tag="CategoryCount">
+          <li><a href="<$mt:CategoryArchiveLink$>"><$mt:CategoryLabel encode_html="1"$></a>
+          <mt:Else>
+          <li><p class="nolink"><$mt:CategoryLabel encode_html="1"$></p>
+          </mt:If>
+          <mt:SubCategories>
+          <mt:SubCatIsFirst><ul class="submenu"></mt:SubCatIsFirst>
+          <mt:If tag="CategoryCount">
+          <li class="catdepth-<$mt:CategoryDepth$>"><a href="<$mt:CategoryArchiveLink$>"><$mt:CategoryLabel encode_html="1"$></a>
+          <mt:Else>
+          <li class="catdepth-<$mt:CategoryDepth$>"><p class="nolink"><$mt:CategoryLabel encode_html="1"$></p>
+          </mt:If>
+          <$mt:SubCatsRecurse$></li>
+          <mt:SubCatIsLast></ul></mt:SubCatIsLast>
+          </mt:SubCategories>
+          </li>
+          </mt:TopLevelCategories>
+      </ul>
+	</div>
+    </mt:ArchiveListHeader>
+  </mt:ArchiveList>
+</mt:If>
+
+  <div class="news-sidemenu__wrap">
+  <mt:ArchiveList archive_type="Yearly">
+    <mt:ArchiveListHeader>
+      <h3 class="news-sidemenu__subtitle">年別</h3>
+      <ul class="nav side-entry__wrap">
+    </mt:ArchiveListHeader>  
+      <li><a href="<$mt:ArchiveLink encode_html="1"$>">
+      <$mt:ArchiveTitle$></a></li>
+    <mt:ArchiveListFooter>
+      </ul>
+    </mt:ArchiveListFooter>
+  </mt:ArchiveList>
+	</div>
+</aside>

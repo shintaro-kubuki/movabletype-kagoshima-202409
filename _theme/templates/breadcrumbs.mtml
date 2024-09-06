@@ -1,0 +1,51 @@
+<section class="pankuzu">
+  <div class="container mt-container">
+    <div class="row mt-row">
+      <div class="columns medium-12">
+        <nav role="navigation">
+          <ul>
+<mt:If name="this_page" eq="entrylist">
+<!-- ENTRYlist -->
+            <li class="home"><a href="<$mt:BlogRelativeURL$>">トップ</a></li>
+            <li><span class="pankuzu__current">ニュース</span></li>
+<!-- /ENTRYlist-->
+<mt:ElseIf name="this_page" eq="entry">
+<!-- ENTRY -->
+            <li class="home"><a href="<$mt:BlogRelativeURL$>">トップ</a></li>
+            <li><a href="<$mt:BlogRelativeURL$>news.html">ニュース</a></li>
+          <mt:ParentCategories exclude_current="1">
+            <mt:If tag="CategoryCount">
+            <li><a href="<$mt:CategoryArchiveLink$>"><$mt:CategoryLabel encode_html="1"$></a></li>
+            <mt:Else>
+            <li><$mt:CategoryLabel encode_html="1"$></li>
+            </mt:If>
+          </mt:ParentCategories>
+            <mt:If tag="CategoryCount">
+            <li><a href="<$mt:CategoryArchiveLink$>"><$mt:CategoryLabel encode_html="1"$></a></li>
+            </mt:If>
+            <li><span class="pankuzu__current"><$mt:EntryTitle encode_html="1"$></span></li>
+<!-- /ENTRY-->
+<mt:ElseIf name="this_page" eq="webpage">
+<!-- WEBPAGE -->
+            <li class="home"><a href="<$mt:BlogRelativeURL$>">トップ</a></li>
+              <mt:ParentFolders>
+              <li>
+                <mt:Pages sort_order="ascend" field:pagetype="ページ一覧">
+                  <a href="<$mt:PagePermalink$>"><$mt:FolderLabel encode_html="1"$></a>
+                <mt:Else>
+                  <$mt:FolderLabel encode_html="1"$>
+                </mt:Pages>
+              </li>
+              </mt:ParentFolders>
+              <mt:If name="pages" eq="個別ページ">
+              <!-- 個別ページ -->
+              <li><span class="pankuzu__current"><$mt:PageTitle encode_html="1"$></span></li>
+              </mt:If> 
+<!-- /WEBPAGE-->
+</mt:If>
+          </ul>
+        </nav>
+       </div>
+     </div>
+  </div>
+</section>

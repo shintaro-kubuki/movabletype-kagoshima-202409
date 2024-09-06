@@ -1,0 +1,62 @@
+<!DOCTYPE html><$mt:Include module="全般設定" strip_linefeeds="1"$>
+<html lang="<$mt:BlogLanguage$>">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<meta charset="<$mt:PublishCharset$>">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<meta name="keywords" content="<$mt:GetVar name="meta_keywords"$>">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>検索結果 | <$mt:BlogName encode_html="1"$></title>
+<link rel="shortcut icon" href="<$mt:BlogURL encode_html="1"$>images/favicon.ico">
+<link rel="start" href="<$mt:BlogURL encode_html="1"$>">
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="<$mt:Link template="feed_recent"$>">
+<$mt:CanonicalLink$>
+<!-- Open Graph Protocol -->
+<meta property="og:locale" content="<$mt:BlogLanguage setvar="blog_lang"$><mt:If name="blog_lang" eq="ja">ja_JP<mt:Else><$mt:Var name="blog_lang"$></mt:If>">
+<meta property="og:title" content="<$mt:BlogName encode_html="1"$>">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<$mt:BlogURL encode_html="1"$>">
+<meta property="og:image" content="<$mt:BlogURL encode_html="1"$>images/ogimage.jpg">
+<meta property="og:description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<meta property="og:site_name" content="<$mt:BlogName encode_html="1"$>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@<$mt:Var name='x-twitterVia'$>">
+<meta name="twitter:title" content="<$mt:BlogName encode_html="1"$>">
+<meta name="twitter:description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<meta name="twitter:image" content="<$mt:BlogURL encode_html="1"$>images/ogimage.jpg">
+<!-- Microdata -->
+<meta itemprop="description" content="<$mt:BlogDescription remove_html="1" encode_html="1"$>">
+<link itemprop="url" href="<$mt:BlogURL encode_html="1"$>">
+<link itemprop="image" href="<$mt:BlogURL encode_html="1"$>images/ogimage.jpg">
+<$mt:Include module="ヘッダー内script"$>
+</head>
+<body>
+<$mt:Include module="ヘッダーメニュー"$>
+<div class="UnderlayerJumbotron UnderlayerJumbotron__webpageimg" style="<mt:If name="UnderlayerJumbotron__webpageimg">background-image:url(<mt:Asset id="$UnderlayerJumbotron__webpageimg"><$mt:AssetURL$></mt:Asset>);<mt:ElseIf name="default_ogp_image">background-image:url(<mt:Asset id="$default_ogp_image"><$mt:AssetURL$></mt:Asset>);</mt:If>">
+  	<div class="container mt-container">
+        <h2 class="h2 mt-h2 pageHeader__title">
+          検索結果
+        </h2>
+	</div>
+</div>
+
+<div class="pagesWrap">
+<div class="container-fluid mt-container-fluid">
+  <div class="row mt-row">
+    <div class="col-sm-12">
+    	<div class="result-wrap">
+        <div id="s-result" class="wysiwyg">
+          <!-- search result -->
+        </div>
+      <$mt:ServiceWorkerSnippet pn_auto_spawn="0"$>
+      </div>
+  	</div>
+  </div>
+</div>
+</div>
+<$mt:Include module="ページ上部に戻るボタン"$>
+<$mt:Include module="フッター"$>
+<$mt:Include module="フッター内script"$>
+</body>
+</html>

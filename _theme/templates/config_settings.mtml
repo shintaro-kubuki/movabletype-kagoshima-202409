@@ -1,0 +1,135 @@
+<$mt:Var name="default_ogp_image" editor:type="image" editor:mode="editor" editor:label="デフォルトOGP画像" editor:description="トップページなどに表示される、共通のOGP画像を指定します。"$>
+<h3>ソーシャルメディアアカウントへのリンクボタン</h3>
+<p>フッターに表示するソーシャルメディアのボタンのリンク先を指定します。空欄の場合は非表示になります。</p>
+<$mt:Var name="facebook" editor:type="url" editor:mode="editor" editor:label="FacebookのURL" editor:description="例：https://www.facebook.com/movabletypenet" editor:update:selector=".footer-sns__wrap" editor:update:fetch="1"$>
+<$mt:Var name="x-twitter" editor:type="url" editor:mode="editor" editor:label="XのURL" editor:description="例：https://twitter.com/movabletypenet" editor:update:selector=".footer-sns__wrap" editor:update:fetch="1"$>
+
+<h3>ソーシャルメディアのアカウント情報</h3>
+<p>ソーシャルメディアにシェアする際のアカウント情報を指定します。</p>
+<$mt:Var name="fbAppId" editor:type="text" editor:mode="editor" editor:label="OGPで利用するFacebookのAppID "$>
+<$mt:Var name="x-twitterVia" editor:type="text" editor:mode="editor" editor:label="ポストに含める X のアカウント "$>
+
+<h3>色設定</h3>
+<style>
+[data-details] {
+  margin-top: 15px;
+}
+select {
+  width: 100%;
+  box-sizing: border-box;
+  height: 34px;
+  padding: 6px 12px;
+  color: #555;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+</style>
+<color-settings>
+<select></select>
+<div data-details style="display: none">
+<$mt:Var name="text_main_color" editor:type="color" editor:update:selector=":root" editor:update:attribute="style:--text_main_color" editor:mode="editor" editor:label="文字カラー"$>
+<$mt:Var name="text_middle_color" editor:type="color" editor:update:selector=":root" editor:update:attribute="style:--text_middle_color" editor:mode="editor" editor:label="文字中間カラー"$>
+<$mt:Var name="text_white_color" editor:type="color" editor:update:selector=":root" editor:update:attribute="style:--text_white_color" editor:mode="editor" editor:label="文字白抜きカラー"$>
+<$mt:Var name="main_color" editor:type="color" editor:update:selector=":root" editor:update:attribute="style:--main_color" editor:mode="editor" editor:label="メインカラー"$>
+<$mt:Var name="bg_color" editor:type="color" editor:mode="editor" editor:update:selector=":root" editor:update:attribute="style:--bg_color" editor:label="背景カラー"$>
+<$mt:Var name="middle_color" editor:type="color" editor:update:selector=":root" editor:update:attribute="style:--middle_color" editor:mode="editor" editor:label="背景中間カラー"$>
+</div>
+</color-settings>
+<script type="module">
+const colorThemes = [
+  {
+    label: "ライト",
+    values: {
+      "text_main_color": "#1b1b1b",
+      "text_middle_color": "#909090",
+      "text_white_color": "#ffffff",
+      "main_color": "#0a2363",
+      "bg_color": "#ffffff",
+      "middle_color": "#ebebeb",
+    },
+  },
+  {
+    label: "ダーク",
+    values: {
+      "text_main_color": "#ffffff",
+      "text_middle_color": "#989898",
+      "text_white_color": "#ffffff",
+      "main_color": "#1affe4",
+      "bg_color": "#1a1a1a",
+      "middle_color": "#797979",
+    },
+  },
+  {
+    label: "ファンシー",
+    values: {
+      "text_main_color": "#4d4d4d",
+      "text_middle_color": "#C7B2B8",
+      "text_white_color": "#ffffff",
+      "main_color": "#ff709b",
+      "bg_color": "#ffffff",
+      "middle_color": "#C9EEE6",
+    },
+  },
+  {
+    label: "カスタム",
+  }
+];
+
+if (!customElements.get("color-settings")) {
+customElements.define(
+  "color-settings",
+  class extends HTMLElement {
+    connectedCallback() {
+      setTimeout(() => {
+        const select = this.querySelector("select");
+        const customThemeLabel = colorThemes.find((theme) => !theme.values)?.label;
+
+        const details = this.querySelector("[data-details]");
+        function updateDetails() {
+          details.style.display = select.value === customThemeLabel ? "block" : "none";
+        }
+
+        const inputs = {};
+        this.querySelectorAll(`input[type="color"]`).forEach((input) => {
+          inputs[input.name] = input;
+        });
+        const inputsCount = Object.keys(inputs).length;
+
+        let selected;
+        for (const { label, values } of colorThemes) {
+          const option = document.createElement("option");
+          option.value = label;
+          option.textContent = label;
+
+          if (values
+            && inputsCount === Object.keys(values).length
+            && Object.keys(values).every((k) => inputs[k]?.value === values[k])) {
+            selected = option.selected = true;
+          }
+
+          select.appendChild(option);
+        }
+        if (!selected) {
+          select.value = customThemeLabel;
+          updateDetails();
+        }
+
+        select.addEventListener("change", () => {
+          updateDetails();
+
+          const { values } = colorThemes.find((theme) => theme.label === select.value);
+          if (!values) {
+            return;
+          }
+          for (const k in values) {
+            inputs[k].value = values[k];
+          }
+          Object.values(inputs)[0].dispatchEvent(new Event("input"));
+        });
+      }, 300);
+    }
+  }
+);
+}
+</script>
