@@ -3,15 +3,15 @@
       <div class="footer-item">
       <div>
 <mt:SetVars>
-	blogid=<$mt:BlogID$>
-	blogurl=<$mt:BlogRelativeURL$>search.html
+	blogid=<mt:BlogID/>
+	blogurl=<mt:BlogRelativeURL/>search.html
 </mt:SetVars>
-<$mt:SiteSearchSnippet　limit="3" blog_ids="$blogid" form_action="$blogurl" search_result_container="s-result"$>
+<mt:SiteSearchSnippet/>
       </div>
       <div class="footer-sns">
           <ul class="footer-sns__wrap">
-          <mt:If name="facebook"><li class="footer-sns__facebook"><a href="<$mt:GetVar name="facebook"$>"><i class="fab fa-facebook-f"></i></a></li></mt:If>
-          <mt:If name="x-twitter"><li class="footer-sns__x-twitter"><a href="<$mt:GetVar name="x-twitter"$>"><i class="fa-brands fa-x-twitter"></i></a></li></mt:If>
+          <mt:If name="facebook"><li class="footer-sns__facebook"><a href="<mt:GetVar name="facebook"/>"><i class="fab fa-facebook-f"></i></a></li></mt:If>
+          <mt:If name="x-twitter"><li class="footer-sns__x-twitter"><a href="<mt:GetVar name="x-twitter"/>"><i class="fa-brands fa-x-twitter"></i></a></li></mt:If>
         </ul>
       </div>
       </div>
@@ -20,7 +20,7 @@
           <ul class="footer-menu__wrap">
           <li>
             <dl class="footer-menu__column">
-              <dt><a href="<$mt:BlogRelativeURL$>">トップ</a></dt>
+              <dt><a href="<mt:BlogRelativeURL/>">トップ</a></dt>
             </dl>
           </li>
 
@@ -29,18 +29,18 @@
               <dt><a href="<$mt:BlogRelativeURL$>news.html">ニュース</a></dt>
                     <mt:TopLevelCategories>
                     <mt:If tag="CategoryCount">
-                    <dd class="firstmenu"><a href="<$mt:CategoryArchiveLink$>"><$mt:CategoryLabel encode_html="1"$></a>
-                    <mt:Else>
-                    <dd class="firstmenu"><p class="nolink"><$mt:CategoryLabel encode_html="1"$></p>
+                    <dd class="firstmenu"><a href="<mt:CategoryArchiveLink/>"><mt:CategoryLabel encode_html="1"/></a>
+                    <mt:Else/>
+                    <dd class="firstmenu"><p class="nolink"><mt:CategoryLabel encode_html="1"/></p>
                     </mt:If>
                     <mt:SubCategories>
                     <mt:SubCatIsFirst><dd class="submenu"></mt:SubCatIsFirst>
                     <mt:If tag="CategoryCount">
-                    <dd class="catdepth-<$mt:CategoryDepth$>"><a href="<$mt:CategoryArchiveLink$>"><$mt:CategoryLabel encode_html="1"$></a>
-                    <mt:Else>
-                    <dd class="catdepth-<$mt:CategoryDepth$>"><p class="nolink"><$mt:CategoryLabel encode_html="1"$></p>
+                    <dd class="catdepth-<mt:CategoryDepth/>"><a href="<mt:CategoryArchiveLink/>"><mt:CategoryLabel encode_html="1"/></a>
+                    <mt:Else/>
+                    <dd class="catdepth-<mt:CategoryDepth/>"><p class="nolink"><mt:CategoryLabel encode_html="1"/></p>
                     </mt:If>
-                    <$mt:SubCatsRecurse$></dd>
+                    <mt:SubCatsRecurse/></dd>
                     <mt:SubCatIsLast></dd></mt:SubCatIsLast>
                     </mt:SubCategories>
                   </dd>
@@ -50,40 +50,40 @@
           <mt:TopLevelFolders>
             <mt:IfNonZero tag="MTFolderCount">
               <li>
-                <dl class="footer-menu__column depth-<$mt:FolderDepth$>">
-                  <mt:SetVarBlock name="pages"><mt:Pages sort_order="ascend" field:pagetype="ページ一覧"><$mt:PageTitle$></mt:Pages></mt:SetVarBlock>
+                <dl class="footer-menu__column depth-<mt:FolderDepth/>">
+                  <mt:SetVarBlock name="pages"><mt:Pages sort_order="ascend" field:pagetype="ページ一覧"><mt:PageTitle/></mt:Pages></mt:SetVarBlock>
                     <mt:If name="pages">
                     <mt:Pages sort_order="ascend" field:pagetype="ページ一覧" limit="1">
                       <dt>
-                      <a href="<$mt:PagePermalink$>"><$mt:FolderLabel encode_html="1"$></a>
+                      <a href="<mt:PagePermalink/>"><mt:FolderLabel encode_html="1"/></a>
                       </dt>
                     </mt:Pages>
-                    <mt:Else>
+                    <mt:Else/>
                       <dt class="no-check">
-                        <$mt:FolderLabel encode_html="1"$>
+                        <mt:FolderLabel encode_html="1"/>
                       </dt>
                     </mt:If>
                 <mt:Pages sort_order="ascend" field:pagetype="個別ページ">
-                <mt:SetVarBlock name="top"><$mt:CustomFieldValue identifier="pagetype"$></mt:SetVarBlock>
+                <mt:SetVarBlock name="top"><mt:CustomFieldValue identifier="pagetype"/></mt:SetVarBlock>
                   <dd class="submenu">
-                      <a href="<$mt:PagePermalink$>"><$MTPageTitle$></a>
+                      <a href="<mt:PagePermalink/>"><mt:PageTitle/></a>
                   </dd>
                 </mt:Pages>
               </dl>
               <mt:SubFolders>
-              <dl class="footer-menu__column footer-menu__column--depth<$mt:FolderDepth$>">
+              <dl class="footer-menu__column footer-menu__column--depth<mt:FolderDepth/>">
               <mt:Pages sort_order="ascend" field:pagetype="ページ一覧">
                 <dt>
-                <a href="<$mt:PagePermalink$>"><$mt:FolderLabel encode_html="1"$></a>
+                <a href="<mt:PagePermalink/>"><mt:FolderLabel encode_html="1"/></a>
                 </dt>
               </mt:Pages>
               <mt:Pages sort_order="ascend" field:pagetype="個別ページ">
                 <dd class="submenu">
-                    <a href="<$mt:PagePermalink$>"><$MTPageTitle$></a>
+                    <a href="<mt:PagePermalink/>"><mt:PageTitle/></a>
                 </dd>
               </mt:Pages>
               </dl>
-              <$mt:SubFolderRecurse$>
+              <mt:SubFolderRecurse/>
               </mt:SubFolders>
             </li>
             </mt:IfNonZero>
@@ -91,7 +91,7 @@
           <mt:Pages no_folder="1" sort_order="ascend">
             <li>
               <dl class="footer-menu__column">
-                <dt><a href="<$mt:PagePermalink$>"><$mt:PageTitle encode_html="1"$></a>
+                <dt><a href="<mt:PagePermalink/>"><mt:PageTitle encode_html="1"/></a>
                 </dt>
                 <dd></dd>
               </dl>
@@ -102,12 +102,12 @@
         </div>
   <div class="copyarea">
 		<div class="footerlogo__wrap">
-        <a href="<$mt:BlogRelativeURL$>"><!-- mt-site-editor-logo --><mt:If name="logo"><img src="<mt:Asset id="$logo"><$mt:AssetURL$></mt:Asset>" alt="<$mt:BlogName encode_html="1"$>"><mt:Else><!-- mt-site-editor-logo-if-empty --><$mt:BlogName encode_html="1"$><!-- /mt-site-editor-logo-if-empty --></mt:If><!-- /mt-site-editor-logo --></a>
+        <a href="<mt:BlogRelativeURL/>"><!-- mt-site-editor-logo --><mt:If name="logo"><img src="<mt:Asset id="$logo"><mt:AssetURL/></mt:Asset>" alt="<mt:BlogName encode_html="1"/>"><mt:Else/><!-- mt-site-editor-logo-if-empty --><mt:BlogName encode_html="1"/><!-- /mt-site-editor-logo-if-empty --></mt:If><!-- /mt-site-editor-logo --></a>
 <mt:If name="number">
-    <p class="footer__number"><i class="fa-solid fa-phone"></i><a href="tel:<$mt:Var name="number"$>"><$mt:Var name="number" editor:type="contenteditable" editor:label="電話番号" editor:mode="text" editor:button:mode="before" editor:update:required="1" editor:button:position="-15,-25"$></a></p>
+    <p class="footer__number"><i class="fa-solid fa-phone"></i><a href="tel:<mt:Var name="number"/>"><mt:Var name="number" editor:type="contenteditable" editor:label="電話番号" editor:mode="text" editor:button:mode="before" editor:update:required="1" editor:button:position="-15,-25"/></a></p>
 </mt:If>
   </div>
-    <p class="copyarea__text"><$mt:Var name="copyright" default="© 2024 Six Apart" editor:type="contenteditable" editor:label="コピーライト" editor:mode="text" editor:button:mode="before" editor:update:required="1" editor:button:position="-15,-25"$></p>
+    <div class="copyarea__text"><small><mt:Var name="copyright" default="© 2024 Six Apart" editor:type="contenteditable" editor:label="コピーライト" editor:mode="text" editor:button:mode="before" editor:update:required="1" editor:button:position="-15,-25"/></small></div>
   </div>
     </div>
 </footer>
